@@ -1,0 +1,25 @@
+package exemplos.alura.alunos;
+
+public class Aluno {
+
+    private String nome;
+
+    public Aluno(final String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        final Aluno outro = (Aluno) obj;
+        return outro.getNome().equals(this.nome);
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+}

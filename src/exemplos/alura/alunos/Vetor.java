@@ -4,34 +4,78 @@ import java.util.Arrays;
 
 public class Vetor {
 
-    private Aluno[] alunos = new Aluno[100];
+	private Aluno[] alunos = new Aluno[100];
+	private int total = 0;
+	
+	private void moreSpace() {
+		if (total == alunos.length) {
+			Aluno[] novoArray = new Aluno[alunos.length*2];
+			for (int i = 0; i < alunos.length; i++) {
+				novoArray[i] = alunos[i];
+			}
+		this.alunos = novoArray;
+		}
+	}
 
-    public void adiciona(final Aluno aluno) {
-        //recebe um aluno
-    }
+	// adicionar aluno
+	public void add(Aluno aluno) {
+		this.moreSpace();
+		this.alunos[total] = aluno;
+		total++;
 
-    public Aluno get(final int index) {
-        //recebe uma posição e devolve um aluno
-        return null;
-    }
+	}
 
-    public void remove(final int index) {
-        //remove um aluno baseado no index
-    }
+	public void add(Aluno aluno, Integer posicao) {
+		this.moreSpace();
+		if (!(posicao >= 0) && !(posicao <= total)) {
+			throw new IllegalArgumentException("Posicao invalida");
+		}
+		
+		for (int i = total - 1; i >= posicao ; --i ) {
+			System.out.println(i);
+			alunos[i+1] = alunos[i];			
+		}
+		alunos[posicao] = aluno;
+		total++;
+	}
 
-    public boolean contains(final Aluno aluno) {
-        // descobre se o aluno esta contido na lista
-        return false;
-    }
+	// pega um aluno
+	public Aluno get(int index) {
+		if (index > total || index < 0) {
+			throw new IllegalArgumentException("Posicao invalida");
+		}
+		return alunos[index];
+	}
 
-    public int length() {
-        // devolve a quantidade de alunos
-        return 0;
-    }
 
-    public String toString() {
-        //facilita na impressão da lista
-        return Arrays.toString(alunos);
-    }
+	// remove um aluno baseado no index
+	public void remove(int posicao) {
+		for ( int i = posicao; i < total; i++) {
+			this.alunos[i] = alunos[i+1];
+		}
+		this.alunos[total] = null;
+		total--;
+	}
+	
+
+	// descobre se o aluno esta contido na lista
+	public boolean contains(final Aluno aluno) {
+		for (Aluno unicoAluno : alunos) {
+			if (unicoAluno == aluno) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// devolve a quantidade de alunos
+	public int length() {
+		return total;
+	}
+
+	// facilita na impressão da lista
+	public String toString() {
+		return Arrays.toString(alunos);
+	}
 
 }

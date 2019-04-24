@@ -14,7 +14,7 @@ public class Aluno {
 
     @Override
     public boolean equals(final Object obj) {
-        final Aluno outro = (Aluno) obj;
+        Aluno outro = (Aluno) obj;
         return outro.getNome().equals(this.nome);
     }
 
